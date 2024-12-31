@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:turismo_sm/ui/mobile/component/button_mobile_component.dart';
 
 import '../../controllers/controller.dart';
 
@@ -35,20 +34,19 @@ class HomeViewMobile extends StatelessWidget {
               duration: const Duration(milliseconds: 2000),
               child: Container(
                   margin: const EdgeInsets.only(bottom: 5.0),
-                  color: Colors.transparent,
+                  //color: Colors.transparent,
                   width: screenWidth *
-                      0.13, // Ajuste relativo al ancho de la pantalla
+                      0.09, // Ajuste relativo al ancho de la pantalla
                   height: screenHeight *
-                      0.016, // Ajuste relativo al alto de la pantalla
-                  child: TextButton(
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all(Colors.orange),
-                      ),
+                      0.010, // Ajuste relativo al alto de la pantalla
+                  child: FloatingActionButton(
+                      backgroundColor: Colors.orange,
                       onPressed: () {},
                       child: Text(
                         'Cómo llegar',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: screenWidth * 0.01,
+                            fontSize: screenWidth * 0.009,
                             color: Colors.white,
                             fontWeight: FontWeight.w500),
                       ))),
@@ -88,18 +86,24 @@ class _ImagenFondoHomeState extends State<ImagenFondoHome> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Obx(() {
       if (bannerController.isLoading.value) {
-        return const Center(
-            child: SizedBox(
-                height: 10,
-                width: 10,
-                child: CircularProgressIndicator(
-                  strokeWidth: 1.5,
-                  strokeAlign: BorderSide.strokeAlignCenter,
-                  backgroundColor: Colors.orange,
-                  color: Colors.green,
-                )));
+        return Center(
+          child: Container(
+            margin: const EdgeInsets.only(top: 1.0),
+            //color: Colors.green,
+            height: 1.5, // Altura del contenedor
+            width: 1.5, // Ancho del contenedor
+            alignment: Alignment.center,
+            child: const CircularProgressIndicator(
+              strokeWidth: 0.25, // Grosor del borde
+              color: Colors.green, // Color principal
+              backgroundColor: Colors.orange,
+            ),
+          ),
+        );
       } else if (bannerController.banners.isNotEmpty) {
         final banner = bannerController
             .banners[bannerController.currentIndex.value]; // Banner actual
@@ -112,7 +116,7 @@ class _ImagenFondoHomeState extends State<ImagenFondoHome> {
             key: ValueKey<String>(
                 banner.imagenBanner), // Clave única para el banner
             height: 75,
-            width: 200,
+            width: 85,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               image: DecorationImage(
@@ -127,26 +131,32 @@ class _ImagenFondoHomeState extends State<ImagenFondoHome> {
                   left: 0,
                   right: 0,
                   child: Container(
+                    //color: Colors.yellow,
+                    width: 10,
+                    margin: const EdgeInsets.symmetric(horizontal: 5),
                     padding: const EdgeInsets.symmetric(
-                      vertical: 8.0,
-                      horizontal: 5.0,
+                      vertical: 5.0,
+                      horizontal: 10,
                     ),
-                    child: Text(
-                      banner.detalleBanner,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 3.9,
-                        fontWeight: FontWeight.bold,
-                        shadows: [
-                          Shadow(
-                            offset: const Offset(
-                                0.5, 0.5), // Desplazamiento de la sombra
-                            blurRadius: 1.0, // Radio de desenfoque
-                            color: Colors.black87, // Color de la sombra
-                          ),
-                        ],
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(
+                        banner.detalleBanner,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize:
+                              screenWidth * 0.007, // Tamaño dinámico del texto
+                          fontWeight: FontWeight.bold,
+                          shadows: const [
+                            Shadow(
+                              offset: Offset(0.2, 0.2),
+                              blurRadius: 1.0,
+                              color: Colors.black87,
+                            ),
+                          ],
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
