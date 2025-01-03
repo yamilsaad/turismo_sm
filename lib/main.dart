@@ -62,7 +62,10 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Turismo San Martin',
       initialRoute: '/inicio',
-      theme: ThemeData(fontFamily: "Poppins", useMaterial3: true),
+      theme: ThemeData(
+          fontFamily: "Poppins",
+          useMaterial3: true,
+          colorSchemeSeed: const Color.fromARGB(255, 35, 248, 43)),
       onGenerateRoute: Flurorouter.router.generator,
     );
   }

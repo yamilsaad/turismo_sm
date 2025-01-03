@@ -115,7 +115,7 @@ class HomePage extends StatelessWidget {
                       onPressed: () {
                         showLoginRegisterDialog(context);
                       },
-                      label: Text(
+                      label: const Text(
                         'ingresar',
                         style: TextStyle(
                             color: Colors.grey, fontWeight: FontWeight.w600),
@@ -128,7 +128,7 @@ class HomePage extends StatelessWidget {
       endDrawer: screenWidth <= 1000
           ? Drawer(
               width: 300,
-              shape: RoundedRectangleBorder(
+              shape: const RoundedRectangleBorder(
                 borderRadius:
                     BorderRadius.zero, // Esto elimina las esquinas redondeadas
               ),
@@ -149,20 +149,20 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   DrawerHeader(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color(0xff8FD14F),
                     ),
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 1.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 1.0),
                           child: SizedBox(
                             height: 60,
                             width: 60,
                             child: Image.asset('assets/img/logo_turismo2.webp'),
                           ),
                         ),
-                        Center(
+                        const Center(
                           child: Text(
                             'San Martín Turismo',
                             style: TextStyle(
@@ -175,22 +175,20 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Center(child: const _NavButton(text: 'inicio', pageIndex: 0)),
-                  Divider(height: 2.0),
-                  Center(
-                      child: const _NavButton(text: 'lugares', pageIndex: 1)),
-                  Divider(height: 2.0),
-                  Center(
-                      child:
-                          const _NavButton(text: 'alojamiento', pageIndex: 2)),
-                  Divider(height: 2.0),
-                  Center(
-                      child:
-                          const _NavButton(text: 'experimenta', pageIndex: 3)),
-                  Divider(height: 2.0),
-                  Center(
-                      child: const _NavButton(text: 'contacto', pageIndex: 4)),
-                  Divider(height: 2.0),
+                  const Center(child: _NavButton(text: 'inicio', pageIndex: 0)),
+                  const Divider(height: 4.0),
+                  const Center(
+                      child: _NavButton(text: 'lugares', pageIndex: 1)),
+                  const Divider(height: 4.0),
+                  const Center(
+                      child: _NavButton(text: 'alojamiento', pageIndex: 2)),
+                  const Divider(height: 4.0),
+                  const Center(
+                      child: _NavButton(text: 'experimenta', pageIndex: 3)),
+                  const Divider(height: 4.0),
+                  const Center(
+                      child: _NavButton(text: 'contacto', pageIndex: 4)),
+                  const Divider(height: 4.0),
                 ],
               ),
             )
@@ -339,7 +337,7 @@ class _MobileBody extends StatelessWidget {
         HospedajeViewMobile(),
         //SeleccionDestinoView(),
         ExperimentaViewMobile(),
-        ContactoView(),
+        ContactoViewMobile(),
       ],
     );
   }

@@ -43,7 +43,7 @@ class PageProvider extends ChangeNotifier {
     scrollController.animateToPage(
       index,
       duration: Duration(milliseconds: 1000), // Aumenta la duración a 1500ms
-      curve: Curves.easeOut, // Utiliza una curva más suave
+      curve: Curves.linear, // Utiliza una curva más suave
     );
   }
 }
