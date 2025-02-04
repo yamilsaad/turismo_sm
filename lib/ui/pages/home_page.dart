@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:turismo_sm/providers/pages_provider.dart';
+import 'package:turismo_sm/routers/fluro_router.dart';
 import 'package:turismo_sm/ui/mobile/experimenta_view_mobile.dart';
 import 'package:turismo_sm/ui/mobile/view_mobile.dart';
 import 'package:turismo_sm/ui/pages/alert/alert_auth.dart';
@@ -27,12 +28,19 @@ class HomePage extends StatelessWidget {
         leading: null, // No mostrar nada en la posición del leading
         title: Row(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 1.0),
-              child: SizedBox(
-                height: 60,
-                width: 60,
-                child: Image.asset('assets/img/logo_turismo2.webp'),
+            GestureDetector(
+              onTap: () {
+                // Usando Fluro para navegar al home
+                Flurorouter.router
+                    .navigateTo(context, '/inicio', replace: true);
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 1.0),
+                child: SizedBox(
+                  height: 60,
+                  width: 60,
+                  child: Image.asset('assets/img/logo_turismo2.webp'),
+                ),
               ),
             ),
             Padding(

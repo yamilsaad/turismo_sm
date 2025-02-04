@@ -81,7 +81,7 @@ class _ImagenFondoHomeState extends State<ImagenFondoHome> {
   @override
   void initState() {
     super.initState();
-    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 25), (timer) {
       bannerController.updateCurrentBannerIndex();
     });
   }
@@ -136,12 +136,12 @@ class _ImagenFondoHomeState extends State<ImagenFondoHome> {
                     child: Text(
                       banner.detalleBanner,
                       style: TextStyle(
-                        color: const Color(0XFF5F6F52),
+                        color: const Color(0XFFAFD198),
                         fontSize: (_screenWidth * 0.2).clamp(12.0, 16.0),
                         fontWeight: FontWeight.bold,
                         shadows: const [
                           Shadow(
-                            offset: Offset(0.2, 0.2),
+                            offset: Offset(1.0, 1.0),
                             blurRadius: 1.0,
                             color: Colors.black87,
                           ),
