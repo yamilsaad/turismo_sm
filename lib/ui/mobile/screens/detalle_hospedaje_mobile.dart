@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:turismo_sm/routers/fluro_router.dart';
+import 'package:get/get.dart';
+import 'package:turismo_sm/routers/app_route.dart';
 
 class DetalleHospedajeMobile extends StatelessWidget {
   final String hospedajeId;
@@ -22,9 +23,7 @@ class DetalleHospedajeMobile extends StatelessWidget {
             // Añadido GestureDetector alrededor de la imagen del logo
             GestureDetector(
               onTap: () {
-                // Usando Fluro para navegar al home
-                Flurorouter.router
-                    .navigateTo(context, '/inicio', replace: true);
+                Get.offNamed('/inicio');
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 1.0),

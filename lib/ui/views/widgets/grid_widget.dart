@@ -1,22 +1,24 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:turismo_sm/routers/fluro_router.dart';
 import '../../../controllers/lugar_controller.dart';
-import '../screens/detalle_lugar_screen.dart';
 
 class LugaresGridWidget extends StatelessWidget {
   const LugaresGridWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final _screenHeight = MediaQuery.of(context).size.height;
+    final _screenWidth = MediaQuery.of(context).size.width;
     final LugarController lugarController = Get.find<LugarController>();
 
     return Obx(() {
       if (lugarController.isLoading.value) {
-        return const Center(
+        return Center(
             child: SizedBox(
-                height: 10, width: 10, child: CircularProgressIndicator()));
+                height: _screenHeight * 0.15,
+                width: _screenWidth * 0.15,
+                child: CircularProgressIndicator()));
       } else if (lugarController.lugares.isEmpty) {
         return const Center(child: Text('No hay información disponible.'));
       } else if (lugarController.lugares.length < 3) {
@@ -36,10 +38,8 @@ class LugaresGridWidget extends StatelessWidget {
                 lugar.subtituloLugar,
                 lugar.imagenPrincipal,
                 () {
-                  Flurorouter.router.navigateTo(
-                    context,
-                    '/detalle-lugar/${lugar.idLugar}',
-                  );
+                  Get.toNamed('/detalle-lugar',
+                      arguments: lugar); // Navegar con GetX
                 },
               );
             }).toList(),
@@ -51,6 +51,8 @@ class LugaresGridWidget extends StatelessWidget {
 
   Widget _buildCategoryContainer(BuildContext context, String title,
       String subtituloLugar, String imagePath, VoidCallback onTap) {
+    final _screenHeight = MediaQuery.of(context).size.height;
+    final _screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -63,8 +65,8 @@ class LugaresGridWidget extends StatelessWidget {
               elevation: 5.0,
               child: Container(
                 margin: const EdgeInsets.only(left: 5, right: 5),
-                height: 60, // Tamaño ajustable
-                width: 75,
+                height: _screenHeight * 0.06, // Tamaño ajustable
+                width: _screenWidth * 0.075,
               ),
             ),
           ),
@@ -97,6 +99,8 @@ class _ZoomHoverContainerState extends State<ZoomHoverContainer> {
 
   @override
   Widget build(BuildContext context) {
+    final _screenHeight = MediaQuery.of(context).size.height;
+    final _screenWidth = MediaQuery.of(context).size.width;
     return MouseRegion(
       onEnter: (_) {
         setState(() {
@@ -113,8 +117,8 @@ class _ZoomHoverContainerState extends State<ZoomHoverContainer> {
         children: [
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 2.0),
-            height: 60,
-            width: 75,
+            height: _screenHeight * 0.55,
+            width: _screenWidth * 0.3,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2.0),
               boxShadow: [
@@ -127,9 +131,9 @@ class _ZoomHoverContainerState extends State<ZoomHoverContainer> {
               ],
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(2.0),
+              borderRadius: BorderRadius.circular(10.0),
               child: AnimatedScale(
-                scale: _isHovered ? 1.2 : 1.0,
+                scale: _isHovered ? 1.1 : 1.0,
                 duration: const Duration(milliseconds: 200),
                 child: Image.network(
                   widget.imagePath,
@@ -141,10 +145,10 @@ class _ZoomHoverContainerState extends State<ZoomHoverContainer> {
           if (_isHovered)
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 2.0),
-              height: 60,
-              width: 75,
+              height: _screenHeight * 0.55,
+              width: _screenWidth * 0.3,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(2.0),
+                borderRadius: BorderRadius.circular(10.0),
                 color: Colors.black.withOpacity(0.5),
               ),
               child: FadeIn(
@@ -156,19 +160,19 @@ class _ZoomHoverContainerState extends State<ZoomHoverContainer> {
                       children: [
                         Text(
                           widget.title,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
-                            fontSize: 8.0,
+                            fontSize: _screenWidth * 0.035,
                             fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 1.0),
+                        SizedBox(height: _screenWidth * 0.01),
                         Text(
                           widget.subtituloLugar,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white70,
-                            fontSize: 2.0,
+                            fontSize: _screenWidth * 0.02,
                           ),
                           textAlign: TextAlign.center,
                         ),

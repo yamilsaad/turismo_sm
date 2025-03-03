@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+
+import '../../../routers/app_route.dart';
 
 class DetalleHospedajeScreen extends StatelessWidget {
   final String hospedajeId;
@@ -18,12 +21,17 @@ class DetalleHospedajeScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 1.0),
-              child: SizedBox(
-                  height: 60,
-                  width: 60,
-                  child: Image.asset('assets/img/logo_turismo2.webp')),
+            GestureDetector(
+              onTap: () {
+                Get.offNamed('/inicio');
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 1.0),
+                child: SizedBox(
+                    height: 60,
+                    width: 60,
+                    child: Image.asset('assets/img/logo_turismo2.webp')),
+              ),
             ),
             Padding(
               padding: EdgeInsets.all(5.0),

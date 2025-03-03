@@ -7,18 +7,26 @@ class BannerController extends GetxController {
   var isLoading = false.obs;
   var currentIndex = 0.obs; // Índice actual del banner
 
+  @override
+  void onInit() {
+    super.onInit();
+    if (banners.isEmpty) {
+      // Solo cargar si no hay banners
+      fetchBanners();
+    }
+  }
+
   // Obtener todos los banners desde Firestore
   Future<void> fetchBanners() async {
+    if (isLoading.value) return; // Evitar que se recargue si ya está cargando
     isLoading(true);
     try {
       final snapshot =
           await FirebaseFirestore.instance.collection('banners').get();
       banners.clear();
       for (var doc in snapshot.docs) {
-        print(doc.data()); // Ver los datos en la consola
         banners.add(BannerModel.fromMap(doc.data(), doc.id));
       }
-      print("Número de banners obtenidos: ${banners.length}");
     } catch (e) {
       print("Error al obtener banners: $e");
     } finally {

@@ -13,15 +13,15 @@ class HomeViewMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
+    final _screenHeight = MediaQuery.of(context).size.height;
+    final _screenWidth = MediaQuery.of(context).size.width;
     final BannerController bannerController =
         Get.put(BannerController()); // Inicializa el controlador
     bannerController
         .fetchBanners(); // Llamar al método para obtener los banners
 
     return Container(
+      height: _screenHeight * 0.4,
       color: Colors.white,
       width: double.infinity,
       child: Column(
@@ -29,8 +29,8 @@ class HomeViewMobile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const ImagenFondoHome(),
-          SizedBox(height: screenHeight * 0.01),
-          Padding(
+          SizedBox(height: _screenHeight * 0.01),
+          /*Padding(
             padding: const EdgeInsets.all(10.0),
             child: GuiasWidget(),
           ),
@@ -38,13 +38,13 @@ class HomeViewMobile extends StatelessWidget {
             padding:
                 const EdgeInsets.only(top: 5.0, bottom: 5, right: 10, left: 10),
             child: EmpresasWidget(),
-          ),
-          SizedBox(height: screenHeight * 0.009),
+          ),*/
+          SizedBox(height: _screenHeight * 0.009),
           FadeInUp(
             duration: const Duration(milliseconds: 2000),
             child: SizedBox(
-              width: screenWidth * 0.75,
-              height: screenHeight * 0.06,
+              width: _screenWidth * 0.75,
+              height: _screenHeight * 0.05,
               child: FloatingActionButton(
                 backgroundColor: Colors.orange,
                 onPressed: () {},
@@ -52,7 +52,7 @@ class HomeViewMobile extends StatelessWidget {
                   'Cómo llegar',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: (screenWidth * 0.1).clamp(14.0, 18.0),
+                    fontSize: (_screenWidth * 0.1).clamp(14.0, 18.0),
                     color: Colors.white,
                     fontWeight: FontWeight.w500,
                   ),
@@ -112,13 +112,14 @@ class _ImagenFondoHomeState extends State<ImagenFondoHome> {
 
         return Container(
           key: ValueKey<String>(banner.imagenBanner),
-          height: 220,
+          height: _screenHeigth * 0.3,
           width: double.infinity,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(banner.imagenBanner),
+              image: AssetImage('assets/img/banner_ink.png'),
+              //NetworkImage(banner.imagenBanner),
               fit: BoxFit.cover,
-              filterQuality: FilterQuality.high,
+              //filterQuality: FilterQuality.high,
             ),
           ),
           child: ClipRRect(
@@ -134,9 +135,10 @@ class _ImagenFondoHomeState extends State<ImagenFondoHome> {
                       vertical: 5.0,
                     ),
                     child: Text(
-                      banner.detalleBanner,
+                      'Vive una nueva experiencia en San Martín',
+                      //banner.detalleBanner,
                       style: TextStyle(
-                        color: const Color(0XFFAFD198),
+                        color: Colors.grey[100],
                         fontSize: (_screenWidth * 0.2).clamp(12.0, 16.0),
                         fontWeight: FontWeight.bold,
                         shadows: const [

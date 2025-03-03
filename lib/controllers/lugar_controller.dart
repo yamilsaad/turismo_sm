@@ -7,10 +7,19 @@ class LugarController extends GetxController {
   var isLoading = false.obs;
 
   // Obtener todos los lugares desde Firestore
-  @override
+  /*@override
   void onInit() {
     super.onInit();
     fetchLugares();
+  }*/
+  @override
+  void onInit() {
+    super.onInit();
+    fetchLugares().then((_) {
+      print("Lugares cargados correctamente.");
+    }).catchError((error) {
+      print("Error al cargar los lugares: $error");
+    });
   }
 
   Future<void> fetchLugares() async {

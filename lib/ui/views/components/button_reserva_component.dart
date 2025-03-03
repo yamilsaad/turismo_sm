@@ -6,14 +6,19 @@ class ButtonReservaComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      height: 20,
-      color: Color(0xffFF6600),
+    final _screenHeight = MediaQuery.of(context).size.height;
+    final _screenWidth = MediaQuery.of(context).size.width;
+    return TextButton(
+      style:
+          ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.orange)),
       onPressed: () {},
-      child: Text(
-        'Cómo llegar',
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 6.0, color: Colors.white),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          'Cómo llegar',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: _screenWidth * 0.02, color: Colors.white),
+        ),
       ),
     );
   }

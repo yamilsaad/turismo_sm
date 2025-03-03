@@ -2,7 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:turismo_sm/routers/fluro_router.dart';
+import 'package:get/get.dart';
+import 'package:turismo_sm/routers/app_route.dart';
 
 class HospedajeViewMobile extends StatelessWidget {
   const HospedajeViewMobile({super.key});
@@ -56,10 +57,8 @@ class HospedajeViewMobile extends StatelessWidget {
                     detalle: data['detalle_hospedaje'] ?? '',
                     imagen: data['imagen_principal'] ?? '',
                     onTap: () {
-                      Flurorouter.router.navigateTo(
-                        context,
-                        '/detalle-hospedajeMobile/${hospedajes[index].id}',
-                      );
+                      Get.toNamed(
+                          '/detalle-hospedajeMobile/${hospedajes[index].id}');
                     },
                   );
                 },

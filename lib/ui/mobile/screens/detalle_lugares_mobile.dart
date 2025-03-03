@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:turismo_sm/routers/fluro_router.dart';
+import 'package:get/get.dart';
+import 'package:turismo_sm/routers/app_route.dart';
 
 import '../../../models/lugar_model.dart';
 
@@ -20,9 +21,7 @@ class DetalleLugaresMobile extends StatelessWidget {
             // Añadido GestureDetector alrededor de la imagen del logo
             GestureDetector(
               onTap: () {
-                // Usando Fluro para navegar al home
-                Flurorouter.router
-                    .navigateTo(context, '/inicio', replace: true);
+                Get.offNamed('/inicio');
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 1.0),
@@ -52,6 +51,7 @@ class DetalleLugaresMobile extends StatelessWidget {
             expandedHeight: 300.0,
             floating: false,
             pinned: true,
+            automaticallyImplyLeading: false,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
                 lugar.nombreLugar,

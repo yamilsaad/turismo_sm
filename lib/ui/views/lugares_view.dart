@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:turismo_sm/ui/views/widgets/elegante_adorne_widget.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'widgets/widget.dart';
 
 class LugaresView extends StatelessWidget {
@@ -8,8 +8,11 @@ class LugaresView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.contain,
+    final _screenHeight = MediaQuery.of(context).size.height;
+    final _screenWidth = MediaQuery.of(context).size.width;
+    return Container(
+      height: _screenHeight,
+      width: _screenWidth,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -19,63 +22,87 @@ class LugaresView extends StatelessWidget {
               child: FadeIn(
                   duration: const Duration(milliseconds: 1000),
                   child: const LugaresGridWidget())),
-          FadeIn(
+          /*FadeIn(
               duration: Duration(milliseconds: 1000),
-              child: const ElegantAdornedWidget())
+              child: const ElegantAdornedWidget())*/
         ],
       ),
     );
   }
 }
 
-class AppbarLugaresWidget extends StatelessWidget {
+class AppbarLugaresWidget extends StatefulWidget {
   const AppbarLugaresWidget({
     super.key,
   });
 
   @override
+  State<AppbarLugaresWidget> createState() => _AppbarLugaresWidgetState();
+}
+
+class _AppbarLugaresWidgetState extends State<AppbarLugaresWidget> {
+  bool _isVisible = false;
+  @override
   Widget build(BuildContext context) {
-    return FadeIn(
-      duration: const Duration(milliseconds: 2500),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 3.0),
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 3.0),
-          //color: Colors.amber,
-          height: 12,
-          width: 200,
-          child: const Column(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Conoce tu lugar en San Martín:',
-                    style:
-                        TextStyle(fontSize: 5.0, fontWeight: FontWeight.w500),
+    final _screenHeight = MediaQuery.of(context).size.height;
+    final _screenWidth = MediaQuery.of(context).size.width;
+    return VisibilityDetector(
+      key: Key('lugares_desktop'),
+      onVisibilityChanged: (info) {
+        if (info.visibleFraction > 0.2) {
+          setState(() {
+            _isVisible = true;
+          });
+        }
+      },
+      child: _isVisible
+          ? Padding(
+              padding: const EdgeInsets.only(top: 3.0),
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 3.0),
+                //color: Colors.amber,
+                height: _screenHeight * 0.12,
+                width: _screenWidth * 0.5,
+                child: FadeIn(
+                  duration: Duration(milliseconds: 1200),
+                  child: Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Conoce tu lugar en San Martín:',
+                            style: TextStyle(
+                                fontSize: _screenWidth * 0.02,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Sé parte de la historia de nuestra tierra',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: _screenWidth * 0.015,
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FontStyle.italic,
+                                color: Color(0XFF5F6F52)),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Sé parte de la historia de nuestra tierra',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 2.5,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.italic,
-                        color: Color(0XFF5F6F52)),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+            )
+          : Container(
+              height: _screenHeight * 0.075,
+              width: _screenWidth * 0.075,
+            ),
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:turismo_sm/firebase_options.dart';
-import 'package:turismo_sm/routers/fluro_router.dart';
+import 'package:turismo_sm/routers/app_route.dart';
 
 import 'controllers/controller.dart';
 import 'providers/provider.dart';
@@ -51,9 +51,11 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    Flurorouter.configureRoutes();
+
     Get.put(BannerController()); // Inicializa el BannerController
     Get.put(LugarController()); // Inicializa el LugarController
+    Get.put(HospedajeController()); //Inicializa el HospedajeController
+    Get.put(SearchController()); //Inicializa el HospedajeController
   }
 
   @override
@@ -61,12 +63,12 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Turismo San Martin',
-      initialRoute: '/inicio',
+      initialRoute: '/',
       theme: ThemeData(
           fontFamily: "Poppins",
           useMaterial3: true,
           colorSchemeSeed: const Color.fromARGB(255, 35, 248, 43)),
-      onGenerateRoute: Flurorouter.router.generator,
+      getPages: AppRouter.routes,
     );
   }
 }

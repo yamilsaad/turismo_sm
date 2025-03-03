@@ -1,137 +1,106 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ContactoView extends StatelessWidget {
   const ContactoView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final _screenHeight = MediaQuery.of(context).size.height * 0.35;
+    final _screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      padding: EdgeInsets.all(20), // Espaciado interno
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color(0xffD5FFD0), Colors.white], // Colores del gradiente
-          begin: Alignment.topCenter, // Punto de inicio del gradiente
-          end: Alignment.bottomCenter, // Punto final del gradiente
-        ),
-      ),
-      child: Center(
-        child: FittedBox(
-          fit: BoxFit.contain,
-          child: FadeInUp(
-            duration: Duration(milliseconds: 2500),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Contacto',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'Estamos aquí para ayudarte. Contáctanos a través de cualquier medio.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0XFF5F6F52),
-                  ),
-                ),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.email, color: Colors.black87),
-                      onPressed: () {
-                        // Lógica para enviar un correo electrónico
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.phone, color: Colors.black87),
-                      onPressed: () {
-                        // Lógica para hacer una llamada telefónica
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.message, color: Colors.black87),
-                      onPressed: () {
-                        // Lógica para enviar un mensaje
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: () {
-                    // Lógica para abrir la app de correo o formulario de contacto
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
-                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  child: Text(
-                    'Enviar Mensaje',
+      height: _screenHeight,
+      width: _screenWidth,
+      color: Color(0xffEAFAEA),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Links y Redes Sociales
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Logo y Descripción
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "San Martín Turismo",
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
+                        color: Colors.black,
+                        fontSize: _screenWidth * 0.02,
+                        fontFamily: 'Poppins'),
+                  ),
+                  SizedBox(height: _screenHeight * 0.01),
+                  SizedBox(
+                    width: _screenWidth * 0.15,
+                    child: Text(
+                      "¡Vive una experiencia única!",
+                      style:
+                          TextStyle(color: Colors.black, fontFamily: "Poppins"),
                     ),
                   ),
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'O síguenos en nuestras redes sociales',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0XFF5F6F52),
+                ],
+              ),
+
+              // Enlaces rápidos
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _footerLink("Institucional"),
+                  SizedBox(
+                    width: _screenWidth * 0.025,
                   ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.facebook, color: Colors.blue),
-                      onPressed: () {
-                        // Lógica para redirigir a Facebook
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.one_x_mobiledata_rounded,
-                          color: Colors.lightBlue),
-                      onPressed: () {
-                        // Lógica para redirigir a Twitter
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.sports_soccer_outlined,
-                          color: Colors.pinkAccent),
-                      onPressed: () {
-                        // Lógica para redirigir a Instagram
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Text(
-                  '© 2024 San Martín Turismo. Todos los derechos reservados. Desarrollado por Soft Tech Solutions.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.black38,
+                  _footerLink("Autoridades"),
+                  SizedBox(
+                    width: _screenWidth * 0.025,
                   ),
-                ),
-              ],
+                  _footerLink("Nuestro proveedor"),
+                ],
+              ),
+
+              // Redes Sociales
+              Row(
+                children: [
+                  _socialIcon(FontAwesomeIcons.facebook),
+                  _socialIcon(FontAwesomeIcons.xTwitter),
+                  _socialIcon(FontAwesomeIcons.linkedin),
+                  _socialIcon(FontAwesomeIcons.instagram),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: _screenHeight * 0.025),
+          // Línea divisoria y Derechos
+          Divider(color: Colors.grey),
+          SizedBox(height: _screenWidth * 0.035),
+          Center(
+            child: Text(
+              "© 2025 San Martín Turismo. Sitio desarrollado por Soft Tech Solutions.",
+              style: TextStyle(
+                  color: Colors.black, fontSize: _screenWidth * 0.012),
             ),
           ),
-        ),
+        ],
       ),
+    );
+  }
+
+  Widget _footerLink(String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Text(
+        text,
+        style: const TextStyle(color: Colors.black, fontSize: 16),
+      ),
+    );
+  }
+
+  Widget _socialIcon(IconData icon) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: Icon(icon, color: Colors.black, size: 22),
     );
   }
 }

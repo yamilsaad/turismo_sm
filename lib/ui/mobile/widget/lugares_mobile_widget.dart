@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:turismo_sm/routers/fluro_router.dart';
+import 'package:turismo_sm/routers/app_route.dart';
 import '../../../controllers/lugar_controller.dart';
 
 class LugaresMobileWidget extends StatelessWidget {
@@ -36,10 +36,7 @@ class LugaresMobileWidget extends StatelessWidget {
                   lugar.subtituloLugar,
                   lugar.imagenPrincipal,
                   () {
-                    Flurorouter.router.navigateTo(
-                      context,
-                      '/detalle-lugarMobile/${lugar.idLugar}',
-                    );
+                    Get.toNamed('/detalle-lugarMobile/${lugar.idLugar}');
                   },
                 );
               }).toList(),
