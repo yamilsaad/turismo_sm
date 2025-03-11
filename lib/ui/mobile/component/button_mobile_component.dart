@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../controllers/controller.dart';
 
 class ButtonMobileComponent extends StatelessWidget {
   const ButtonMobileComponent({super.key});
@@ -9,6 +12,8 @@ class ButtonMobileComponent extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
+    final MapaController _mapaController = Get.find<MapaController>();
+
     return SizedBox(
       width: screenWidth * 0.15, // Ajuste relativo al ancho de la pantalla
       height: screenHeight * 0.020, // Ajuste relativo al alto de la pantalla
@@ -16,7 +21,8 @@ class ButtonMobileComponent extends StatelessWidget {
         style: ButtonStyle(
           backgroundColor: WidgetStateProperty.all(Colors.orange),
         ),
-        onPressed: () {},
+        onPressed: () =>
+            _mapaController.abrirMapa("San Martín, San Juan, Argentina"),
         child: Center(
           child: Text(
             'Cómo llegar',

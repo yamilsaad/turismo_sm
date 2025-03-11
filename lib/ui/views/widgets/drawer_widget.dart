@@ -14,6 +14,7 @@ class DrawerWidget extends StatelessWidget {
     final _screenHeight = MediaQuery.of(context).size.height;
     final _screenWidth = MediaQuery.of(context).size.width;
     return Drawer(
+      backgroundColor: Color(0xffEAFAEA),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10.0),

@@ -85,7 +85,12 @@ class _ImagenFondoHomeState extends State<ImagenFondoHome> {
     final _screenWidth = MediaQuery.of(context).size.width;
     return Obx(() {
       if (bannerController.isLoading.value) {
-        return const Center(child: CircularProgressIndicator());
+        return Center(
+          child: SizedBox(
+            height: _screenHeight * 0.65,
+            child: Image.asset('assets/img/logo_carga.gif'),
+          ),
+        );
       } else if (bannerController.banners.isNotEmpty) {
         final banner = bannerController
             .banners[bannerController.currentIndex.value]; // Banner actual
@@ -97,7 +102,7 @@ class _ImagenFondoHomeState extends State<ImagenFondoHome> {
           child: Container(
             key: ValueKey<String>(
                 banner.imagenBanner), // Clave única para el banner
-            height: _screenHeight * 0.65,
+            height: _screenHeight * 0.7,
             width: _screenWidth,
             decoration: BoxDecoration(
               image: DecorationImage(

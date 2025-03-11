@@ -1,5 +1,7 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../controllers/controller.dart';
 
 class ButtonReservaComponent extends StatelessWidget {
   const ButtonReservaComponent({super.key});
@@ -8,10 +10,13 @@ class ButtonReservaComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     final _screenHeight = MediaQuery.of(context).size.height;
     final _screenWidth = MediaQuery.of(context).size.width;
+
+    final MapaController mapaController = Get.find<MapaController>();
     return TextButton(
       style:
           ButtonStyle(backgroundColor: WidgetStatePropertyAll(Colors.orange)),
-      onPressed: () {},
+      onPressed: () =>
+          mapaController.abrirMapa("San Martín, San Juan, Argentina"),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(

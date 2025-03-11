@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:turismo_sm/ui/mobile/widget/empresas_widget.dart';
-import 'package:turismo_sm/ui/mobile/widget/guias_widget.dart';
 
 import '../../controllers/controller.dart';
 
@@ -19,6 +17,7 @@ class HomeViewMobile extends StatelessWidget {
         Get.put(BannerController()); // Inicializa el controlador
     bannerController
         .fetchBanners(); // Llamar al método para obtener los banners
+    final MapaController _mapaController = Get.find<MapaController>();
 
     return Container(
       height: _screenHeight * 0.4,
@@ -47,7 +46,8 @@ class HomeViewMobile extends StatelessWidget {
               height: _screenHeight * 0.05,
               child: FloatingActionButton(
                 backgroundColor: Colors.orange,
-                onPressed: () {},
+                onPressed: () => _mapaController
+                    .abrirMapa("San Martín, San Juan, Argentina"),
                 child: Text(
                   'Cómo llegar',
                   textAlign: TextAlign.center,
@@ -101,8 +101,7 @@ class _ImagenFondoHomeState extends State<ImagenFondoHome> {
       if (bannerController.isLoading.value) {
         return Center(
           child: SizedBox(
-            width: 22,
-            height: 22,
+            height: _screenHeigth * 0.3,
             child: Image.asset('assets/img/logo_carga.gif'),
           ),
         );

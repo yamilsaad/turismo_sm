@@ -10,7 +10,7 @@ class ContactoViewMobile extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      height: screenHeight * 0.6,
+      height: screenHeight * 0.5,
       width: screenWidth * 1,
       color: Color(0xffEAFAEA),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

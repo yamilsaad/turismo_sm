@@ -56,6 +56,7 @@ class _MyAppState extends State<MyApp> {
     Get.put(LugarController()); // Inicializa el LugarController
     Get.put(HospedajeController()); //Inicializa el HospedajeController
     Get.put(SearchController()); //Inicializa el HospedajeController
+    Get.put(MapaController()); //Inicializa controlador de mapa
   }
 
   @override
@@ -67,7 +68,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
           fontFamily: "Poppins",
           useMaterial3: true,
-          colorSchemeSeed: const Color.fromARGB(255, 35, 248, 43)),
+          colorSchemeSeed: Colors.green[700]),
       getPages: AppRouter.routes,
     );
   }
