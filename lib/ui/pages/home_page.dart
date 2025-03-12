@@ -115,6 +115,8 @@ class _MobileView extends StatelessWidget {
           //LugaresViewMobile(),
           //HospedajeViewMobile(),
           //SeleccionDestinoView(),
+          VideoViewMobile(),
+          FraseViewMobile(),
           ExperimentaViewMobile(),
           ContactoViewMobile(),
         ],

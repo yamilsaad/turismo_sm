@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-class VideoView extends StatefulWidget {
-  const VideoView({super.key});
+class VideoViewMobile extends StatefulWidget {
+  const VideoViewMobile({super.key});
 
   @override
-  State<VideoView> createState() => _VideoViewState();
+  State<VideoViewMobile> createState() => _VideoViewMobileState();
 }
 
-class _VideoViewState extends State<VideoView> with TickerProviderStateMixin {
+class _VideoViewMobileState extends State<VideoViewMobile>
+    with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
   bool _isVisible = false; // Variable para controlar la animación
@@ -89,8 +90,8 @@ class _VideoViewState extends State<VideoView> with TickerProviderStateMixin {
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: VideoFondoWidget(
-                screenHeight: _screenHeight * 0.5,
-                screenWidth: _screenWidth * 0.4,
+                screenHeight: _screenHeight,
+                screenWidth: _screenWidth,
                 isLoading: _isLoading,
                 errorMessage: _errorMessage,
                 controller: _controller),
@@ -101,7 +102,7 @@ class _VideoViewState extends State<VideoView> with TickerProviderStateMixin {
             color: Colors.black.withOpacity(0.5), // Ajusta el color y opacidad
           ),
           VisibilityDetector(
-            key: Key('asesoramiento-desktop-view'),
+            key: Key('video-view-mobile'),
             onVisibilityChanged: (info) {
               if (info.visibleFraction > 0.2 && !_isVisible) {
                 setState(() {
@@ -114,13 +115,16 @@ class _VideoViewState extends State<VideoView> with TickerProviderStateMixin {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: _screenHeight * 0.5,
-                      width: _screenWidth * 0.5,
+                      height: _screenHeight * 0.05,
+                    ),
+                    SizedBox(
+                      height: _screenHeight * 0.4,
+                      width: _screenWidth * 0.75,
                       child: _isVisible
                           ? FadeIn(
                               duration: Duration(milliseconds: 1500),
@@ -132,8 +136,9 @@ class _VideoViewState extends State<VideoView> with TickerProviderStateMixin {
                                     style: TextStyle(
                                         color: Colors.grey[200],
                                         fontFamily: 'Poppins',
-                                        fontSize: _screenWidth * 0.025),
-                                    textAlign: TextAlign.right,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: _screenWidth * 0.06),
+                                    textAlign: TextAlign.left,
                                   ),
                                 ),
                               ),
@@ -144,9 +149,6 @@ class _VideoViewState extends State<VideoView> with TickerProviderStateMixin {
                               width: _screenWidth * 0.075,
                             ),
                     ),
-                    SizedBox(
-                      width: _screenWidth * 0.05,
-                    )
                   ],
                 ),
               ],
@@ -189,7 +191,7 @@ class VideoFondoWidget extends StatelessWidget {
                   child: Text(_errorMessage!,
                       style: const TextStyle(color: Colors.red)))
               : FittedBox(
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.cover,
                   child: SizedBox(
                     width: _controller.value.size.width,
                     height: _controller.value.size.height,
