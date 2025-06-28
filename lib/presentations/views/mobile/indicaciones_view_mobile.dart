@@ -15,6 +15,7 @@ class _IndicacionesViewMobileState extends State<IndicacionesViewMobile>
     with TickerProviderStateMixin {
   final MapController _mapController = MapController();
   double _zoomLevel = 10.0;
+  bool _isInteractive = false;
 
   void _animatedMove(LatLng destLocation, double destZoom) {
     final _latTween = Tween<double>(
@@ -55,6 +56,12 @@ class _IndicacionesViewMobileState extends State<IndicacionesViewMobile>
     _animatedMove(_mapController.camera.center, _mapController.camera.zoom - 1);
   }
 
+  void _toggleInteraction() {
+    setState(() {
+      _isInteractive = !_isInteractive;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -87,8 +94,9 @@ class _IndicacionesViewMobileState extends State<IndicacionesViewMobile>
                   options: MapOptions(
                     initialCenter: sanMartin,
                     initialZoom: _zoomLevel,
-                    interactionOptions:
-                        InteractionOptions(flags: InteractiveFlag.none),
+                    interactionOptions: InteractionOptions(
+                      flags: _isInteractive ? InteractiveFlag.all : InteractiveFlag.none,
+                    ),
                   ),
                   children: [
                     TileLayer(
@@ -247,6 +255,12 @@ class _IndicacionesViewMobileState extends State<IndicacionesViewMobile>
                     _mapZoomButton(FontAwesomeIcons.magnifyingGlassMinus, _zoomOut),
                   ],
                 ),
+                const SizedBox(height: 8),
+                _mapToggleButton(
+                  _isInteractive ? Icons.touch_app : Icons.touch_app_outlined,
+                  _toggleInteraction,
+                  _isInteractive,
+                ),
               ],
             ),
           ),
@@ -297,6 +311,20 @@ class _IndicacionesViewMobileState extends State<IndicacionesViewMobile>
         onPressed: onPressed,
         mini: true,
         child: Icon(icon, size: 18),
+      ),
+    );
+  }
+
+  Widget _mapToggleButton(IconData icon, VoidCallback onPressed, bool isActive) {
+    return SizedBox(
+      width: 36,
+      height: 36,
+      child: FloatingActionButton(
+        heroTag: icon.toString(),
+        onPressed: onPressed,
+        mini: true,
+        backgroundColor: isActive ? Colors.green : Colors.grey,
+        child: Icon(icon, size: 18, color: Colors.white),
       ),
     );
   }
