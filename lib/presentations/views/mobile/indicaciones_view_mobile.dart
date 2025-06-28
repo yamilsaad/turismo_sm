@@ -95,7 +95,9 @@ class _IndicacionesViewMobileState extends State<IndicacionesViewMobile>
                     initialCenter: sanMartin,
                     initialZoom: _zoomLevel,
                     interactionOptions: InteractionOptions(
-                      flags: _isInteractive ? InteractiveFlag.all : InteractiveFlag.none,
+                      flags: _isInteractive
+                          ? InteractiveFlag.all
+                          : InteractiveFlag.none,
                     ),
                   ),
                   children: [
@@ -223,26 +225,43 @@ class _IndicacionesViewMobileState extends State<IndicacionesViewMobile>
                     SizedBox(width: 36),
                     _mapArrowButton(Icons.keyboard_arrow_up, () {
                       final center = _mapController.camera.center;
-                      _animatedMove(LatLng(center.latitude + 0.05, center.longitude), _mapController.camera.zoom);
+                      _animatedMove(
+                          LatLng(center.latitude + 0.05, center.longitude),
+                          _mapController.camera.zoom);
                     }),
+                    const SizedBox(width: 8),
+                    _mapToggleButton(
+                      _isInteractive
+                          ? Icons.touch_app_outlined
+                          : Icons.touch_app_outlined,
+                      _toggleInteraction,
+                      _isInteractive,
+                    ),
                   ],
                 ),
+                const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _mapArrowButton(Icons.keyboard_arrow_left, () {
                       final center = _mapController.camera.center;
-                      _animatedMove(LatLng(center.latitude, center.longitude - 0.05), _mapController.camera.zoom);
+                      _animatedMove(
+                          LatLng(center.latitude, center.longitude - 0.05),
+                          _mapController.camera.zoom);
                     }),
                     SizedBox(width: 8),
                     _mapArrowButton(Icons.keyboard_arrow_down, () {
                       final center = _mapController.camera.center;
-                      _animatedMove(LatLng(center.latitude - 0.05, center.longitude), _mapController.camera.zoom);
+                      _animatedMove(
+                          LatLng(center.latitude - 0.05, center.longitude),
+                          _mapController.camera.zoom);
                     }),
                     SizedBox(width: 8),
                     _mapArrowButton(Icons.keyboard_arrow_right, () {
                       final center = _mapController.camera.center;
-                      _animatedMove(LatLng(center.latitude, center.longitude + 0.05), _mapController.camera.zoom);
+                      _animatedMove(
+                          LatLng(center.latitude, center.longitude + 0.05),
+                          _mapController.camera.zoom);
                     }),
                   ],
                 ),
@@ -250,16 +269,12 @@ class _IndicacionesViewMobileState extends State<IndicacionesViewMobile>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _mapZoomButton(FontAwesomeIcons.magnifyingGlassPlus, _zoomIn),
+                    _mapZoomButton(
+                        FontAwesomeIcons.magnifyingGlassPlus, _zoomIn),
                     SizedBox(width: 8),
-                    _mapZoomButton(FontAwesomeIcons.magnifyingGlassMinus, _zoomOut),
+                    _mapZoomButton(
+                        FontAwesomeIcons.magnifyingGlassMinus, _zoomOut),
                   ],
-                ),
-                const SizedBox(height: 8),
-                _mapToggleButton(
-                  _isInteractive ? Icons.touch_app : Icons.touch_app_outlined,
-                  _toggleInteraction,
-                  _isInteractive,
                 ),
               ],
             ),
@@ -315,7 +330,8 @@ class _IndicacionesViewMobileState extends State<IndicacionesViewMobile>
     );
   }
 
-  Widget _mapToggleButton(IconData icon, VoidCallback onPressed, bool isActive) {
+  Widget _mapToggleButton(
+      IconData icon, VoidCallback onPressed, bool isActive) {
     return SizedBox(
       width: 36,
       height: 36,

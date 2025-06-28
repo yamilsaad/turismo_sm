@@ -96,7 +96,9 @@ class _IndicacionesViewState extends State<IndicacionesView>
                     initialCenter: sanMartin,
                     initialZoom: _zoomLevel,
                     interactionOptions: InteractionOptions(
-                      flags: _isInteractive ? InteractiveFlag.all : InteractiveFlag.none,
+                      flags: _isInteractive
+                          ? InteractiveFlag.all
+                          : InteractiveFlag.none,
                     ),
                   ),
                   children: [
@@ -152,7 +154,9 @@ class _IndicacionesViewState extends State<IndicacionesView>
                                 "${km.toStringAsFixed(1)} km",
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: ScreenHelper.fontSize(context, 0.012, min: 10, max: 20),
+                                  fontSize: ScreenHelper.fontSize(
+                                      context, 0.012,
+                                      min: 10, max: 20),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -169,13 +173,17 @@ class _IndicacionesViewState extends State<IndicacionesView>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: ScreenHelper.containerHeight(context, 0.05)),
+                    SizedBox(
+                        height: ScreenHelper.containerHeight(context, 0.05)),
                     Text(
                       'Opciones de transporte:',
-                      style:
-                          TextStyle(fontSize: ScreenHelper.fontSize(context, 0.018, min: 16, max: 24), fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: ScreenHelper.fontSize(context, 0.018,
+                              min: 16, max: 24),
+                          fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: ScreenHelper.containerHeight(context, 0.05)),
+                    SizedBox(
+                        height: ScreenHelper.containerHeight(context, 0.05)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -201,29 +209,48 @@ class _IndicacionesViewState extends State<IndicacionesView>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(width: 36), // Espacio para centrar la flecha arriba
+                    SizedBox(
+                        width: 36), // Espacio para centrar la flecha arriba
                     _mapArrowButton(Icons.keyboard_arrow_up, () {
                       final center = _mapController.camera.center;
-                      _animatedMove(LatLng(center.latitude + 0.05, center.longitude), _mapController.camera.zoom);
+                      _animatedMove(
+                          LatLng(center.latitude + 0.05, center.longitude),
+                          _mapController.camera.zoom);
                     }),
+                    const SizedBox(width: 8),
+                    // Botón toggle de interacción
+                    _mapToggleButton(
+                      _isInteractive
+                          ? Icons.touch_app
+                          : Icons.touch_app_outlined,
+                      _toggleInteraction,
+                      _isInteractive,
+                    ),
                   ],
                 ),
+                const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _mapArrowButton(Icons.keyboard_arrow_left, () {
                       final center = _mapController.camera.center;
-                      _animatedMove(LatLng(center.latitude, center.longitude - 0.05), _mapController.camera.zoom);
+                      _animatedMove(
+                          LatLng(center.latitude, center.longitude - 0.05),
+                          _mapController.camera.zoom);
                     }),
                     SizedBox(width: 8),
                     _mapArrowButton(Icons.keyboard_arrow_down, () {
                       final center = _mapController.camera.center;
-                      _animatedMove(LatLng(center.latitude - 0.05, center.longitude), _mapController.camera.zoom);
+                      _animatedMove(
+                          LatLng(center.latitude - 0.05, center.longitude),
+                          _mapController.camera.zoom);
                     }),
                     SizedBox(width: 8),
                     _mapArrowButton(Icons.keyboard_arrow_right, () {
                       final center = _mapController.camera.center;
-                      _animatedMove(LatLng(center.latitude, center.longitude + 0.05), _mapController.camera.zoom);
+                      _animatedMove(
+                          LatLng(center.latitude, center.longitude + 0.05),
+                          _mapController.camera.zoom);
                     }),
                   ],
                 ),
@@ -232,17 +259,12 @@ class _IndicacionesViewState extends State<IndicacionesView>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _mapZoomButton(FontAwesomeIcons.magnifyingGlassPlus, _zoomIn),
+                    _mapZoomButton(
+                        FontAwesomeIcons.magnifyingGlassPlus, _zoomIn),
                     SizedBox(width: 8),
-                    _mapZoomButton(FontAwesomeIcons.magnifyingGlassMinus, _zoomOut),
+                    _mapZoomButton(
+                        FontAwesomeIcons.magnifyingGlassMinus, _zoomOut),
                   ],
-                ),
-                const SizedBox(height: 8),
-                // Botón toggle de interacción
-                _mapToggleButton(
-                  _isInteractive ? Icons.touch_app : Icons.touch_app_outlined,
-                  _toggleInteraction,
-                  _isInteractive,
                 ),
               ],
             ),
@@ -292,7 +314,8 @@ class _IndicacionesViewState extends State<IndicacionesView>
     );
   }
 
-  Widget _mapToggleButton(IconData icon, VoidCallback onPressed, bool isActive) {
+  Widget _mapToggleButton(
+      IconData icon, VoidCallback onPressed, bool isActive) {
     return SizedBox(
       width: 36,
       height: 36,
