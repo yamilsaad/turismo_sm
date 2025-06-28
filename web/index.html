@@ -1,37 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  
   <base href="$FLUTTER_BASE_HREF">
-
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO principal -->
+  <title>Turismo en San Martín, San Juan | Montañas, Viñedos y Aventura</title>
+  <meta name="description" content="Descubre San Martín, San Juan: un destino turístico ideal para familias y amigos, rodeado de montañas, viñedos y experiencias únicas. Disfruta de escapadas económicas, asados, y turismo aventura." />
+  <meta name="keywords" content="turismo, familia, San Martín, montaña, descanso, escape, salida, fin de semana, económico, destino, amigos, familiar, asado, vino, viñedos, nómade digital, San Juan, Argentina, aventura, naturaleza, senderismo, parques nacionales, experiencias únicas" />
+  <link rel="canonical" href="https://tusitioweb.com/" />
+
+  <!-- Open Graph para redes sociales -->
+  <meta property="og:title" content="Turismo en San Martín, San Juan - Naturaleza y aventura" />
+  <meta property="og:description" content="Vive experiencias únicas en San Martín, San Juan: asados, viñedos, senderismo y descanso para familias y amigos." />
+  <meta property="og:image" content="/assets/img/banner_ink2.png" />
+  <meta property="og:url" content="https://tusitioweb.com/" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Turismo en San Martín, San Juan - Naturaleza y aventura" />
+  <meta name="twitter:description" content="Vive experiencias únicas en San Martín, San Juan: asados, viñedos, senderismo y descanso para familias y amigos." />
+  <meta name="twitter:image" content="/assets/img/banner_ink2.png" />
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="turismo_sm">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <meta name="apple-mobile-web-app-title" content="Turismo San Martín">
+  <link rel="apple-touch-icon" href="icons/android-chrome-192x192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="icons/android-chrome-192x192.png"/>
 
-  <title>turismo_sm</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Accesibilidad y estructura semántica -->
+  <meta name="theme-color" content="#8FD14F">
+  <meta name="color-scheme" content="light dark">
+  <meta name="author" content="Soft Tech Solutions">
 
   <!-- Firebase App (the core Firebase SDK) -->
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-
-  <!-- Firebase Analytics -->
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js"></script>
-
-  <!-- Firebase Firestore -->
   <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js"></script>
-
-  <!-- Your Firebase Config -->
   <script>
-    // Your web app's Firebase configuration
     var firebaseConfig = {
       apiKey: "YOUR_API_KEY",
       authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
@@ -41,13 +55,14 @@
       appId: "YOUR_APP_ID",
       measurementId: "YOUR_MEASUREMENT_ID"
     };
-
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
   </script>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+  <main id="main-content" tabindex="-1" aria-label="Contenido principal">
+    <!-- Flutter renderizará aquí -->
+    <script src="flutter_bootstrap.js" defer></script>
+  </main>
 </body>
 </html>

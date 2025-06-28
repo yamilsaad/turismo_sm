@@ -1,75 +1,70 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-import 'package:turismo_sm/firebase_options.dart';
-import 'package:turismo_sm/routers/app_route.dart';
+import 'package:turismo_sm/configs/firebase_options.dart';
+import 'package:turismo_sm/configs/routers/app_route.dart';
+import 'package:turismo_sm/configs/themes/app_theme.dart';
+import 'package:turismo_sm/configs/themes/theme_controller.dart';
+import 'data/providers/controller.dart';
 
-import 'controllers/controller.dart';
-import 'providers/provider.dart';
-
+/// Punto de entrada principal de la aplicación Turismo San Martín.
+/// Inicializa Firebase y los controladores principales con GetX.
 void main() async {
-  WidgetsFlutterBinding
-      .ensureInitialized(); // Asegura que los widgets estén inicializados antes de inicializar Firebase
-  await AppState
-      .initializeDefault(); // Espera a que se inicialice Firebase antes de ejecutar runApp()
+  WidgetsFlutterBinding.ensureInitialized();
+  await AppState.initializeDefault();
   runApp(const AppState());
 }
 
+/// Widget raíz de la aplicación. Se encarga de la inicialización global.
 class AppState extends StatelessWidget {
   const AppState({super.key});
 
+  /// Inicializa Firebase con las opciones por plataforma.
   static Future<void> initializeDefault() async {
     FirebaseApp app = await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    // ignore: avoid_print
     print('Initialized default app $app');
   }
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => PageProvider()),
-        //ChangeNotifierProvider(create: (_) => DiseniosProvider())
-      ],
-      child: const MyApp(),
-    );
+    return const MyApp();
   }
 }
 
+/// Widget principal de la aplicación. Configura el tema y las rutas.
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
+  final ThemeController _themeController = Get.put(ThemeController());
+
   @override
   void initState() {
     super.initState();
-
-    Get.put(BannerController()); // Inicializa el BannerController
-    Get.put(LugarController()); // Inicializa el LugarController
-    Get.put(HospedajeController()); //Inicializa el HospedajeController
-    Get.put(SearchController()); //Inicializa el HospedajeController
-    Get.put(MapaController()); //Inicializa controlador de mapa
+    // Inicialización de controladores globales con GetX
+    Get.put(BannerController());
+    Get.put(LugarController());
+    Get.put(HospedajeController());
+    Get.put(SearchController());
+    Get.put(MapaController());
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Turismo San Martin',
-      initialRoute: '/',
-      theme: ThemeData(
-          fontFamily: "Poppins",
-          useMaterial3: true,
-          colorSchemeSeed: Colors.green[700]),
-      getPages: AppRouter.routes,
-    );
+    return Obx(() => GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Turismo San Martin',
+          initialRoute: '/',
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: _themeController.themeMode.value,
+          getPages: AppRouter.routes,
+        ));
   }
 }
