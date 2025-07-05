@@ -53,7 +53,12 @@ class DrawerMobileWidget extends StatelessWidget {
           ),
           ListTile(
             hoverColor: Colors.amber,
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pop();
+              Future.delayed(const Duration(milliseconds: 200), () {
+                Navigator.of(context).pushNamed('/working-mobile');
+              });
+            },
             title: Row(
               children: [
                 FaIcon(
@@ -75,7 +80,12 @@ class DrawerMobileWidget extends StatelessWidget {
           ),
           ListTile(
             hoverColor: Colors.amber,
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pop();
+              Future.delayed(const Duration(milliseconds: 200), () {
+                Navigator.of(context).pushNamed('/working-mobile');
+              });
+            },
             title: Row(
               children: [
                 FaIcon(
@@ -97,7 +107,12 @@ class DrawerMobileWidget extends StatelessWidget {
           ),
           ListTile(
             hoverColor: Colors.amber,
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pop();
+              Future.delayed(const Duration(milliseconds: 200), () {
+                Navigator.of(context).pushNamed('/working-mobile');
+              });
+            },
             title: Row(
               children: [
                 FaIcon(

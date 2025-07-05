@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:turismo_sm/core/helpers/screen_helper.dart';
+import 'package:turismo_sm/core/shared/app_icons.dart';
 
 class IndicacionesView extends StatefulWidget {
   const IndicacionesView({super.key});
@@ -123,7 +123,7 @@ class _IndicacionesViewState extends State<IndicacionesView>
                           height: 80.0,
                           point: sanMartin,
                           child: Icon(
-                            FontAwesomeIcons.houseChimney,
+                            AppIcons.houseChimney,
                             color: Colors.red,
                             size: 40.0,
                           ),
@@ -133,7 +133,7 @@ class _IndicacionesViewState extends State<IndicacionesView>
                           height: 80.0,
                           point: sanJuan,
                           child: Icon(
-                            FontAwesomeIcons.houseChimney,
+                            AppIcons.houseChimney,
                             color: Colors.blue,
                             size: 40.0,
                           ),
@@ -187,12 +187,21 @@ class _IndicacionesViewState extends State<IndicacionesView>
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        _buildTransportOption(FontAwesomeIcons.car, 'Auto',
-                            'Ruta 40 - 30 min desde San Juan', Colors.orange),
-                        _buildTransportOption(FontAwesomeIcons.bus, 'Bus',
-                            'Salidas diarias desde la terminal', Colors.orange),
-                        _buildTransportOption(FontAwesomeIcons.plane, 'Avión',
-                            'Aeropuerto de San Juan + Taxi', Colors.orange),
+                        _buildTransportOption(
+                            AppIcons.car,
+                            'Auto',
+                            'Ruta 40 - 30 min desde San Juan',
+                            AppIcons.transportIconColor),
+                        _buildTransportOption(
+                            AppIcons.bus,
+                            'Bus',
+                            'Salidas diarias desde la terminal',
+                            AppIcons.transportIconColor),
+                        _buildTransportOption(
+                            AppIcons.plane,
+                            'Avión',
+                            'Aeropuerto de San Juan + Taxi',
+                            AppIcons.transportIconColor),
                       ],
                     ),
                   ],
@@ -211,7 +220,7 @@ class _IndicacionesViewState extends State<IndicacionesView>
                   children: [
                     SizedBox(
                         width: 36), // Espacio para centrar la flecha arriba
-                    _mapArrowButton(Icons.keyboard_arrow_up, () {
+                    _mapArrowButton(AppIcons.angleUp, () {
                       final center = _mapController.camera.center;
                       _animatedMove(
                           LatLng(center.latitude + 0.05, center.longitude),
@@ -221,8 +230,8 @@ class _IndicacionesViewState extends State<IndicacionesView>
                     // Botón toggle de interacción
                     _mapToggleButton(
                       _isInteractive
-                          ? Icons.touch_app
-                          : Icons.touch_app_outlined,
+                          ? AppIcons.handPointer
+                          : AppIcons.handPointer,
                       _toggleInteraction,
                       _isInteractive,
                     ),
@@ -232,21 +241,21 @@ class _IndicacionesViewState extends State<IndicacionesView>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _mapArrowButton(Icons.keyboard_arrow_left, () {
+                    _mapArrowButton(AppIcons.angleLeft, () {
                       final center = _mapController.camera.center;
                       _animatedMove(
                           LatLng(center.latitude, center.longitude - 0.05),
                           _mapController.camera.zoom);
                     }),
                     SizedBox(width: 8),
-                    _mapArrowButton(Icons.keyboard_arrow_down, () {
+                    _mapArrowButton(AppIcons.angleDown, () {
                       final center = _mapController.camera.center;
                       _animatedMove(
                           LatLng(center.latitude - 0.05, center.longitude),
                           _mapController.camera.zoom);
                     }),
                     SizedBox(width: 8),
-                    _mapArrowButton(Icons.keyboard_arrow_right, () {
+                    _mapArrowButton(AppIcons.angleRight, () {
                       final center = _mapController.camera.center;
                       _animatedMove(
                           LatLng(center.latitude, center.longitude + 0.05),
@@ -259,11 +268,9 @@ class _IndicacionesViewState extends State<IndicacionesView>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _mapZoomButton(
-                        FontAwesomeIcons.magnifyingGlassPlus, _zoomIn),
+                    _mapZoomButton(AppIcons.magnifyingGlassPlus, _zoomIn),
                     SizedBox(width: 8),
-                    _mapZoomButton(
-                        FontAwesomeIcons.magnifyingGlassMinus, _zoomOut),
+                    _mapZoomButton(AppIcons.magnifyingGlassMinus, _zoomOut),
                   ],
                 ),
               ],
@@ -275,10 +282,10 @@ class _IndicacionesViewState extends State<IndicacionesView>
   }
 
   Widget _buildTransportOption(
-      IconData icon, String title, String subtitle, Color colorIcon) {
+      IconData icon, String title, String subtitle, Color color) {
     return Column(
       children: [
-        Icon(icon, size: 40, color: Colors.green[700]),
+        Icon(icon, color: color, size: 40.0),
         SizedBox(height: 5),
         Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
         SizedBox(height: 3),
@@ -289,15 +296,9 @@ class _IndicacionesViewState extends State<IndicacionesView>
   }
 
   Widget _mapArrowButton(IconData icon, VoidCallback onPressed) {
-    return SizedBox(
-      width: 36,
-      height: 36,
-      child: FloatingActionButton(
-        heroTag: icon.toString(),
-        onPressed: onPressed,
-        mini: true,
-        child: Icon(icon, size: 20),
-      ),
+    return IconButton(
+      icon: Icon(icon, size: 32),
+      onPressed: onPressed,
     );
   }
 
